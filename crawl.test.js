@@ -1,5 +1,6 @@
 const { test, expect } = require("@jest/globals");
-const { normalizeUrl } = require("./crawl.js");
+const { normalizeUrl, getURLsFromHTML } = require("./crawl.js");
+const { html1, link1, html2, link2, html3, link3 } = require("./dummy.js");
 
 test("normalizeUrl", () => {
   expect(normalizeUrl("https://blog.boot.dev/path/")).toBe(
@@ -8,4 +9,25 @@ test("normalizeUrl", () => {
   expect(normalizeUrl("https://blog.boot.dev/path")).toBe("blog.boot.dev/path");
   expect(normalizeUrl("http://blog.boot.dev/path/")).toBe("blog.boot.dev/path");
   expect(normalizeUrl("http://blog.boot.dev/path")).toBe("blog.boot.dev/path");
+});
+("blog.boot.dev/path");
+
+test("getUrlsFromHTML single", () => {
+  const sampleHtml = html1();
+  const sampleLinks = link1();
+  const baseUrl = "https://blog.boot.dev";
+  expect(getURLsFromHTML(sampleHtml, baseUrl)).toStrictEqual(sampleLinks);
+});
+test("getUrlsFromHTML multiple", () => {
+  const sampleHtml = html2();
+  const sampleLinks = link2();
+  const baseUrl = "https://blog.boot.dev";
+  expect(getURLsFromHTML(sampleHtml, baseUrl)).toStrictEqual(sampleLinks);
+});
+
+test("getUrlsFromHTML relative url", () => {
+  const sampleHtml = html3();
+  const sampleLinks = link3();
+  const baseUrl = "https://blog.boot.dev";
+  expect(getURLsFromHTML(sampleHtml, baseUrl)).toStrictEqual(sampleLinks);
 });
