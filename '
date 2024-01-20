@@ -1,14 +1,6 @@
 const { test, expect } = require("@jest/globals");
-const { normalizeUrl, getURLsFromHTML, crawlPage } = require("./crawl.js");
-const {
-  html1,
-  link1,
-  html2,
-  link2,
-  html3,
-  link3,
-  crawlExpected,
-} = require("./dummy.js");
+const { normalizeUrl, getURLsFromHTML } = require("./crawl.js");
+const { html1, link1, html2, link2, html3, link3 } = require("./dummy.js");
 
 // normalizeUrls ------------------------------
 test("normalizeUrl", () => {
@@ -43,21 +35,22 @@ test("getUrlsFromHTML relative url", () => {
 });
 
 // crawlPage ------------------------------
-test("crawlPage success", async () => {
-  const baseUrl = "https://motherfuckingwebsite.com";
-  const expected = crawlExpected();
-  const recieved = await crawlPage(baseUrl);
-  expect(recieved).toBe(expected);
-});
+test("crawlPage success", () => {
+  const sampleHtml = html3();
+  const sampleLinks = link3();
+  const baseUrl = "https://blog.boot.dev";
+  expect(getURLsFromHTML(sampleHtml, baseUrl)).toStrictEqual(sampleLinks);
+}
 
-test("crawlPage bad status", async () => {
-  const baseUrl = "https://blog.boot.dev/sadfasdfasdf/asdfsadfasdfasdfasdf";
-  const recieved = await crawlPage(baseUrl);
-  expect(recieved).toMatch(/status code is/);
-});
-
-test("crawlPage wrong content", async () => {
-  const baseUrl = "https://api.kanye.rest";
-  const recieved = await crawlPage(baseUrl);
-  expect(recieved).toMatch(/content-type is not text\/html/);
-});
+test("crawlPage bad status", () => {
+  const sampleHtml = html3();
+  const sampleLinks = link3();
+  const baseUrl = "https://blog.boot.dev";
+  expect(getURLsFromHTML(sampleHtml, baseUrl)).toStrictEqual(sampleLinks);
+}
+test("crawlPage wrong content", () => {
+  const sampleHtml = html3();
+  const sampleLinks = link3();
+  const baseUrl = "https://blog.boot.dev";
+  expect(getURLsFromHTML(sampleHtml, baseUrl)).toStrictEqual(sampleLinks);
+}

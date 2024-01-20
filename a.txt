@@ -1,38 +1,14 @@
-function html1() {
-  return `<html>
-    <body>
-        <a href="https://blog.boot.dev"><span>Go to Boot.dev</span></a>
-    </body>
-</html>`;
-}
-function link1() {
-  return ["https://blog.boot.dev/"];
-}
-function html2() {
-  return `<html>
-    <body>
-        <a href="https://blog.boot.dev"><span>Go to Boot.dev</span></a>
-        <a href="https://blog.boot.dev/"><span>Go to Boot.dev</span></a>
-    </body>
-</html>`;
-}
-function link2() {
-  return ["https://blog.boot.dev/", "https://blog.boot.dev/"];
-}
 
-function html3() {
-  return `<html>
-    <body>
-        <a href="/news/bootdev-beat-2024-01/"><span>Go to Boot.dev</span></a>
-    </body>
-</html>`;
-}
-function link3() {
-  return ["https://blog.boot.dev/news/bootdev-beat-2024-01/"];
-}
+> node_webcrawler@1.0.0 start
+> node main.js
 
-function crawlExpected() {
-  return `<!DOCTYPE html>
+lmao
+[
+  '/home/tyler/.nvm/versions/node/v18.7.0/bin/node',
+  '/home/tyler/Documents/node_webcrawler/main.js',
+  'https://motherfuckingwebsite.com'
+]
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -112,14 +88,4 @@ function crawlExpected() {
     </script>
     
 </body>
-</html>`;
-}
-module.exports = {
-  html1,
-  link1,
-  html2,
-  link2,
-  html3,
-  link3,
-  crawlExpected,
-};
+</html>
